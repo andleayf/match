@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xcy.mapper.NewMapper">
+    <!--作用是告诉mybatis框架，实体中的哪个属性和数据库中的哪个字段是照应的-->
+    <!--如果数据库中的某些字段和实体中的某些字段不一致，是否可以不写一致的字段，只写不一致的字段呢？-->
+  <select id="selectHeadNew" resultType="news">
+      select * from news  order by hot desc limit 0,2;
+  </select>
+
+    <select id="selectMoreNew" resultType="type">
+      select * from type limit 0,7;
+  </select>
+
+
+</mapper>

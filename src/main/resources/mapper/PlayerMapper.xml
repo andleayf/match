@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xcy.mapper.PlayerMapper">
+    <!--作用是告诉mybatis框架，实体中的哪个属性和数据库中的哪个字段是照应的-->
+    <!--如果数据库中的某些字段和实体中的某些字段不一致，是否可以不写一致的字段，只写不一致的字段呢？-->
+  <select id="selectTop10Player" resultType="player">
+      select * from player group by name order by hot desc limit 0,9;
+  </select>
+    <select id="selectTop10Teamr" resultType="team">
+      select * from team group by name order by hot desc limit 0,9;
+  </select>
+    <select id="selectTop5Match" resultType="match" parameterType="match">
+      select * from t_match
+      <if test="0=detailsId">
+          where to_days(startTime) &lt; to_days(now()) ORDER BY hot LIMIT 0,4;
+      </if>
+        <if test="1=#{detailsId}">
+            WHERE YEARWEEK(date_format(startTime,'%Y-%m-%d')) = YEARWEEK(now()) ORDER BY hot LIMIT 0,4;
+        </if>
+        <if test="#{detailsId}=2">
+            WHERE DATE_FORMAT( startTime, '%Y%m' ) = DATE_FORMAT( CURDATE() , '%Y%m' ) ORDER BY hot LIMIT 0,4;
+        </if>
+  </select>
+</mapper>
