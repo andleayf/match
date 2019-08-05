@@ -349,7 +349,7 @@
 									</div>
 									<!-- two-grids-bottom -->
 									<!-- more-news -->
-									<div class="more-news">
+<!-- more-news -->						<div class="more-news">
 										<div class="more-news-heading">
 											<h3>More News</h3>
 										</div>
@@ -932,7 +932,7 @@
 								<div class="ranking-heading">
 									<h3>Top 10 Players</h3>
 								</div>
-								<div class="ranking-grids">
+								<div class="ranking-grids" id="table">
 									<table>
 										<thead>
 											<th class="th-rank">
@@ -952,7 +952,7 @@
 											</th>
 										</thead>
 										<tbody>
-											<tr class="b-color">
+											<!--<tr class="b-color">
 												<td class="rank">
 													1.
 												</td>
@@ -1121,7 +1121,7 @@
 												<td class="t-points p-points">
 													Uruguay
 												</td>
-											</tr>
+											</tr>-->
 										</tbody>
 									</table>
 								</div>
@@ -1596,6 +1596,41 @@
 	<!-- video -->
 	
 	
-	<!-- //video -->
+	<!-- //top10 -->
+	<script>
+		$(function(){
+			$.get("/top/top10player",null,function(data){
+				loadData(data);
+			});
+		});
+
+		function loadData(data){
+			var  i=0;
+			$(data).each(function(){
+
+
+				var id = this.seckillId;
+				var tr="<tr class=\"b-color\">\n" +
+						"\t\t\t\t\t\t\t\t\t\t\t\t<td class=\"rank\">\n" +
+						"\t\t\t\t\t\t\t\t\t\t\t\t\t9.\n" +
+						"\t\t\t\t\t\t\t\t\t\t\t\t</td>\n" +
+						"\t\t\t\t\t\t\t\t\t\t\t\t<td class=\"country\">\n" +
+						"\t\t\t\t\t\t\t\t\t\t\t\t\t<a href=\"club.html\">Yaya Toure</a>\n" +
+						"\t\t\t\t\t\t\t\t\t\t\t\t</td>\n" +
+						"\t\t\t\t\t\t\t\t\t\t\t\t<td class=\"t-points\">\n" +
+						"\t\t\t\t\t\t\t\t\t\t\t\t\tMidfielder\n" +
+						"\t\t\t\t\t\t\t\t\t\t\t\t</td>\n" +
+						"\t\t\t\t\t\t\t\t\t\t\t\t<td class=\"t-points p-points\">\n" +
+						"\t\t\t\t\t\t\t\t\t\t\t\t\t<a href=\"club.html\">Man City</a>\n" +
+						"\t\t\t\t\t\t\t\t\t\t\t\t</td>\n" +
+						"\t\t\t\t\t\t\t\t\t\t\t\t<td class=\"t-points p-points\">\n" +
+						"\t\t\t\t\t\t\t\t\t\t\t\t\tIvory Coast\n" +
+						"\t\t\t\t\t\t\t\t\t\t\t\t</td>\n" +
+						"\t\t\t\t\t\t\t\t\t\t\t</tr>";
+				$("#table").append(tr);
+			});
+		}
+	</script>
+
 </body>
 </html>
