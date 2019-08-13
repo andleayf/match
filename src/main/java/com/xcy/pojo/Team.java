@@ -13,6 +13,32 @@ public class Team {
     private String country;
     private List<Player> players;
 
+    @Override
+    public String toString() {
+        return "Team{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", detail='" + detail + '\'' +
+                ", win=" + win +
+                ", lose=" + lose +
+                ", hot=" + hot +
+                ", type=" + type +
+                ", country='" + country + '\'' +
+                '}';
+    }
+
+    public Team(int id, String name, String detail, int win, int lose, int hot, int type, String country) {
+        this.id = id;
+        this.name = name;
+        this.detail = detail;
+        this.win = win;
+        this.lose = lose;
+        this.hot = hot;
+        this.type = type;
+        this.country = country;
+    }
+    public Team(){}
+
     public int getId() {
         return id;
     }

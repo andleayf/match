@@ -349,7 +349,7 @@
 									</div>
 									<!-- two-grids-bottom -->
 									<!-- more-news -->
-									<div class="more-news">
+<!-- more-news -->						<div class="more-news">
 										<div class="more-news-heading">
 											<h3>More News</h3>
 										</div>
@@ -932,7 +932,7 @@
 								<div class="ranking-heading">
 									<h3>Top 10 Players</h3>
 								</div>
-								<div class="ranking-grids">
+								<div class="ranking-grids" id="table">
 									<table>
 										<thead>
 											<th class="th-rank">
@@ -952,7 +952,7 @@
 											</th>
 										</thead>
 										<tbody>
-											<tr class="b-color">
+											<!--<tr class="b-color">
 												<td class="rank">
 													1.
 												</td>
@@ -1121,7 +1121,7 @@
 												<td class="t-points p-points">
 													Uruguay
 												</td>
-											</tr>
+											</tr>-->
 										</tbody>
 									</table>
 								</div>
@@ -1463,9 +1463,9 @@
 												<h3>Login</h3>
 											</div>
 											<div class="login-info">
-												<form>
+												<form id ="loginFORM" onsubmit="return false">
 													<input type="text" class="user" name="email" placeholder="Email" required="">
-													<input type="password" name="password" class="lock" placeholder="Password">
+													<input type="password" name="passWord" class="lock" placeholder="Password">
 													<div class="forgot-top-grids">
 														<div class="forgot-grid">
 															<ul>
@@ -1480,7 +1480,7 @@
 														</div>
 														<div class="clearfix"> </div>
 													</div>
-													<input type="submit" name="Sign In" value="Login">
+													<input type="submit" name="Sign In" value="Login" onclick="return validateLogin()">
 													<div class="signup-text">
 														<a href="signup.html">Don't have an account? Create one now</a>
 													</div>
@@ -1532,16 +1532,16 @@
 
       <!-- main content end-->
 	</section>
-	<script src="js/modernizr.custom.js"></script>
+	<script src="../js/modernizr.custom.js"></script>
 	<!--pop-up-->
-	<script src="js/menu_jquery.js"></script>
+	<script src="../js/menu_jquery.js"></script>
 	<!--//pop-up-->	
-	<script src="js/jquery.nicescroll.js"></script>
-	<script src="js/scripts.js"></script>
+	<script src="../js/jquery.nicescroll.js"></script>
+	<script src="../js/scripts.js"></script>
 	<!-- Bootstrap Core JavaScript -->
-	<script src="js/bootstrap.min.js"></script>
+	<script src="../js/bootstrap.min.js"></script>
 	<!--pop-up-->
-	<script src="js/menu_jquery.js"></script>
+	<script src="../js/menu_jquery.js"></script>
 	<!--//pop-up-->	
 	<!-- clock-bottom -->
 	<script type="text/javascript">
@@ -1582,7 +1582,7 @@
 	</script>
 	<!-- clock-bottom -->
 	<!-- ResponsiveTabs -->
-	<script src="js/easyResponsiveTabs.js" type="text/javascript"></script>
+	<script src="../js/easyResponsiveTabs.js" type="text/javascript"></script>
 	<script type="text/javascript">
 		$(document).ready(function () {
 			$('#horizontalTab').easyResponsiveTabs({
@@ -1596,6 +1596,55 @@
 	<!-- video -->
 	
 	
-	<!-- //video -->
+	<!-- //top10 -->
+	<script>
+		$(function(){
+			$.get("/top/top10player",null,function(data){
+				loadData(data);
+			});
+		});
+
+		function loadData(data){
+			var  i=0;
+			$(data).each(function(){
+
+
+				var id = this.seckillId;
+				var tr="<tr class=\"b-color\">\n" +
+						"\t\t\t\t\t\t\t\t\t\t\t\t<td class=\"rank\">\n" +
+						"\t\t\t\t\t\t\t\t\t\t\t\t\t9.\n" +
+						"\t\t\t\t\t\t\t\t\t\t\t\t</td>\n" +
+						"\t\t\t\t\t\t\t\t\t\t\t\t<td class=\"country\">\n" +
+						"\t\t\t\t\t\t\t\t\t\t\t\t\t<a href=\"club.html\">Yaya Toure</a>\n" +
+						"\t\t\t\t\t\t\t\t\t\t\t\t</td>\n" +
+						"\t\t\t\t\t\t\t\t\t\t\t\t<td class=\"t-points\">\n" +
+						"\t\t\t\t\t\t\t\t\t\t\t\t\tMidfielder\n" +
+						"\t\t\t\t\t\t\t\t\t\t\t\t</td>\n" +
+						"\t\t\t\t\t\t\t\t\t\t\t\t<td class=\"t-points p-points\">\n" +
+						"\t\t\t\t\t\t\t\t\t\t\t\t\t<a href=\"club.html\">Man City</a>\n" +
+						"\t\t\t\t\t\t\t\t\t\t\t\t</td>\n" +
+						"\t\t\t\t\t\t\t\t\t\t\t\t<td class=\"t-points p-points\">\n" +
+						"\t\t\t\t\t\t\t\t\t\t\t\t\tIvory Coast\n" +
+						"\t\t\t\t\t\t\t\t\t\t\t\t</td>\n" +
+						"\t\t\t\t\t\t\t\t\t\t\t</tr>";
+				$("#table").append(tr);
+			});
+		}
+	</script>
+
 </body>
+<script>
+	function validateLogin() {
+		var data = $("#loginFORM").serialize();
+		$.post(
+				"/match/user/login",data,function (data) {
+					if(data ='success'){
+						location .href="/match/before/index.html";
+					}else {
+						alert("输入错误,请从新输入")
+					}
+				}
+		);
+	}
+</script>
 </html>

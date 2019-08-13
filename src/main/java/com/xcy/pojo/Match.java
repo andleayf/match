@@ -2,7 +2,7 @@ package com.xcy.pojo;
 
 //import org.springframework.data.elasticsearch.annotations.Document;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+
 
 import java.util.Date;
 import java.util.List;
@@ -20,9 +20,7 @@ public class Match {
     private String url;
 //    private Team readTeam;
 //    private Team blueTeam;
-
     private List<Team> teams;
-
 
     public int getId() {
         return id;
@@ -130,23 +128,12 @@ public class Match {
     public void setTeams(List<Team> teams) {
         this.teams = teams;
     }
+    public Match(int id, String title, String detail) {
+        this.id = id;
+        this.title = title;
+        this.detail = detail;
+    }
+    public Match(){
 
-    @Override
-    public String toString() {
-        return "Match{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", detail='" + detail + '\'' +
-                ", startTime=" + startTime +
-                ", endTime=" + endTime +
-                ", matchType=" + matchType +
-                ", redTeamId=" + redTeamId +
-                ", blueTeamId=" + blueTeamId +
-                ", hot=" + hot +
-                ", url='" + url + '\'' +
-//                ", readTeam=" + readTeam +
-//                ", blueTeam=" + blueTeam +
-                ", teams=" + teams +
-                '}';
     }
 }
