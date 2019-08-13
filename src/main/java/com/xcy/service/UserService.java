@@ -7,4 +7,6 @@ public interface UserService {
     boolean userLogin(User user);
 
     boolean selectUser(User user);
+
+    int insertUser(User user);
 }

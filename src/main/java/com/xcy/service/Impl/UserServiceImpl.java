@@ -22,4 +22,9 @@ public class UserServiceImpl implements UserService {
         int count =userMapper.selectUser(user);
         return count >0 ? true:false;
     }
+
+    @Override
+    public int insertUser(User user) {
+        return userMapper.insertUser(user);
+    }
 }
