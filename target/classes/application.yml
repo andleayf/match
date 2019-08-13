@@ -1,9 +1,0 @@
-#spring :
-#  data :
-#    elasticsearch:
-#      cluster-name: my-application
-#      cluster-nodes: 127.0.0.1:9301
-#      properties:
-#        path:
-#          logs: ./elasticsearch/log #elasticsearch日志存储目录
-#          data: ./elasticsearch/data #elasticsearch数据存储目录
