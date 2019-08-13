@@ -159,13 +159,13 @@
 							<h3>Sign up</h3>
 						</div>
 						<div class="login-info">
-							<form>
-								<input type="text" class="user" name="email" placeholder="Name" required="">
-								<input type="text" class="user" name="email" placeholder="Email" required="">
-								<input type="text" class="user" name="email" placeholder="Phone" required="">
-								<input type="password" name="password" class="lock" placeholder="Password">
-								<input type="password" name="password" class="lock" placeholder="Confirm Password">
-								<input type="submit" name="Sign In" value="Sign up">
+							<form id="loginFORM" onsubmit="return false">
+								<input type="text" class="user" name="name" placeholder="Name" required="">
+								<input type="text" class="user" id="regEmail" name="email" placeholder="Email" required=""><span id="emailMsg"></span>
+								<input type="text" class="user" id="regPhone" name="phone" placeholder="Phone" required=""><span id="phoneMsg"></span>
+								<input type="password" name="password" class="lock" id="regPsw" placeholder="Password">
+								<input type="password" name="password" class="lock" id="regPswAgain" placeholder="Confirm Password"><span id="passMsg"></span>
+								<input type="submit" name="Sign In" value="Sign up" onclick="return emailLogin();">
 								<div class="signup-text">
 									<a href="#"  data-toggle="modal" data-target="#myModal">Already have an account? Login here.</a>
 								</div>
@@ -256,16 +256,16 @@
 
       <!-- main content end-->
 	</section>
-	<script src="js/modernizr.custom.js"></script>
+	<script src="../js/modernizr.custom.js"></script>
 	<!--pop-up-->
-	<script src="js/menu_jquery.js"></script>
+	<script src="../js/menu_jquery.js"></script>
 	<!--//pop-up-->	
-	<script src="js/jquery.nicescroll.js"></script>
-	<script src="js/scripts.js"></script>
+	<script src="../js/jquery.nicescroll.js"></script>
+	<script src="../js/scripts.js"></script>
 	<!-- Bootstrap Core JavaScript -->
-	<script src="js/bootstrap.min.js"></script>
+	<script src="../js/bootstrap.min.js"></script>
 	<!--pop-up-->
-	<script src="js/menu_jquery.js"></script>
+	<script src="../js/menu_jquery.js"></script>
 	<!--//pop-up-->	
 	<!-- clock-bottom -->
 	<script type="text/javascript">
@@ -305,7 +305,58 @@
 	}); 
 	</script>
 	<!-- clock-bottom -->
-	<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.1.min.js"><\/script>')</script>
-	<script src="js/jquery.vide.min.js"></script>
+	<script>window.jQuery || document.write('<script src="../js/vendor/jquery-1.11.1.min.js"><\/script>')</script>
+	<script src="../js/jquery.vide.min.js"></script>
 </body>
+<script>
+	$("#loginFORM").click(function () {
+
+	$("#regEmail").blur(function () {
+		var emailVal=$("#regEmail").val();
+		if(null != emailVal && ""!=emailVal){
+			var params={"email":emailVal};
+			$.post("../user/selectUser",params,function (data) {
+				if(data=="success"){
+					$("#emailMsg").text("该邮箱可用").css("color","green");
+				}else {
+					$("#emailMsg").text("该邮箱已注册,请直接登录").css("color","red");
+				}
+			});
+
+		}
+	});
+
+	$("#regPhone").blur(function () {
+		var phoneVal=$("#regPhone").val();
+		if(null != phoneVal && ""!=phoneVal){
+			var params={"phone":phoneVal};
+			$.post("../user/selectUser",params,function (data) {
+				if(data=="success"){
+					$("#phoneMsg").text("该电话可用").css("color","green");
+				}else {
+					$("#phoneMsg").text("该电话已有,请直接登录").css("color","red");
+				}
+			});
+
+		}
+	  });
+	});
+
+	$("#regPswAgain").blur(function(){
+		var pass01= $("#regPsw").val();
+		var pass02= $("#regPswAgain").val();
+		if(null==pass01 || ""==pass01 || null==pass02 || ""==pass02){
+			$("#passMsg").text("密码不能为空").css("color","red");
+		}else{
+			if(pass01!=pass02){
+				$("#passMsg").text("两次密码输入不一致，请重新输入").css("color","red");
+			}else{
+				$("#passMsg").text("");
+			}
+		}
+
+	});
+
+
+</script>
 </html>	

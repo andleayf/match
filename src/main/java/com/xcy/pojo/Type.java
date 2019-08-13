@@ -1,10 +1,9 @@
 package com.xcy.pojo;
 
 public class Type {
-    private int id ;
+    private int id;
     private String name;
     private String url;
-    private String img;
 
     public int getId() {
         return id;
@@ -30,11 +29,19 @@ public class Type {
         this.url = url;
     }
 
-    public String getImg() {
-        return img;
+    public Type(int id, String name, String url) {
+        this.id = id;
+        this.name = name;
+        this.url = url;
     }
 
-    public void setImg(String img) {
-        this.img = img;
+    @Override
+    public String toString() {
+        return "Type{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", url='" + url + '\'' +
+                '}';
     }
+    public Type(){}
 }
