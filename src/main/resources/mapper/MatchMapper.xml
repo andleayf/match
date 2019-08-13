@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xcy.mapper.MatchMapper">
+
+    <resultMap id="getMatch" type="match">
+        <id column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result property="detail" column="detail"/>
+        <result property="startTime" column="startTime"/>
+        <result property="hot" column="hot"/>
+        <collection property="teams" ofType="team">
+            <id property="id" column="id"/>
+            <result property="name" column="name"/>
+            <result property="detail" column="t_detail"/>
+            <result property="hot" column="t_hot"/>
+        </collection>
+
+    </resultMap>
+
+    <select id="getMatchDetail" resultMap="getMatch" parameterType="int">
+        select  m.id,m.title,m.detail,m.hot,t.name,t.detail t_detail,t.hot t_hot from t_match m left join team t on m.id = t.matchId where m.id=#{id};
+    </select>
+
+</mapper>
