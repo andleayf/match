@@ -1,9 +1,6 @@
 package com.xcy.pojo;
 
 //import org.springframework.data.elasticsearch.annotations.Document;
-
-
-
 import java.util.Date;
 import java.util.List;
 
