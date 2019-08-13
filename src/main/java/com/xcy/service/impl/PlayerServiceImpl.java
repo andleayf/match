@@ -23,7 +23,17 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     @Override
-    public List<Player> selectTop5Match(Match detailsId) {
-        return playerMapper.selectTop5Match(detailsId);
+    public List<Player> selectTop5Match() {
+        return playerMapper.selectTop5Match();
+    }
+
+    @Override
+    public List<Player> selectTop5Match1() {
+        return playerMapper.selectTop5Match1();
+    }
+
+    @Override
+    public List<Player> selectTop5Match2() {
+        return playerMapper.selectTop5Match2();
     }
 }

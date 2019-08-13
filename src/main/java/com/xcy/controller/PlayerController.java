@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/top")
@@ -21,10 +22,12 @@ public class PlayerController {
 
     @RequestMapping(value ="/top10player",method = RequestMethod.GET)
     @ApiOperation(value ="前10名玩家")
+    @ResponseBody
 
-    public String selectTop10Player(){
+    public List<Player> selectTop10Player(){
         List<Player> list=playerService.selectTop10Player();
-        return JsonUtils.objectToJson(list);
+        //System.out.println(JsonUtils.objectToJson(list));
+        return list;
     }
 
     @RequestMapping(value ="/top10team",method = RequestMethod.GET)
@@ -38,11 +41,24 @@ public class PlayerController {
 
     @RequestMapping(value ="/top5Match",method = RequestMethod.GET)
     @ApiOperation(value ="前10名球队 detailId 为状态值 0为今天 1为这周 2为这月")
+    @ResponseBody
 
-    public String selectTop5Match(Match detailsId){
+    public List<Player> selectTop5Match(int detailsId){
         System.out.println(detailsId);
-        List<Player> list=playerService.selectTop5Match(detailsId);
-        System.out.println(JsonUtils.objectToJson(list));
-        return JsonUtils.objectToJson(list);
+        if (detailsId==0){
+            List<Player> list=playerService.selectTop5Match();
+
+            return list;
+        }else if (detailsId==1){
+            List<Player> list=playerService.selectTop5Match1();
+            System.out.println(JsonUtils.objectToJson(list));
+            return list;
+        }else {
+            List<Player> list=playerService.selectTop5Match2();
+            System.out.println(JsonUtils.objectToJson(list));
+            return list;
+        }
+
+
     }
 }

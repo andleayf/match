@@ -10,5 +10,9 @@ public interface PlayerService {
 
     List<Player> selectTop10Teamr();
 
-    List<Player> selectTop5Match(Match detailsId);
+    List<Player> selectTop5Match();
+
+    List<Player> selectTop5Match1();
+
+    List<Player> selectTop5Match2();
 }

@@ -6,21 +6,21 @@
     <!--作用是告诉mybatis框架，实体中的哪个属性和数据库中的哪个字段是照应的-->
     <!--如果数据库中的某些字段和实体中的某些字段不一致，是否可以不写一致的字段，只写不一致的字段呢？-->
   <select id="selectTop10Player" resultType="player">
-      select * from player group by name order by hot desc limit 0,9;
+      select * from player left join team on player.teamId=team.id group by player.name order by player.hot desc limit 0,9;
   </select>
     <select id="selectTop10Teamr" resultType="team">
       select * from team group by name order by hot desc limit 0,9;
   </select>
-    <select id="selectTop5Match" resultType="match" parameterType="match">
-      select * from t_match
-      <if test="0=detailsId">
-          where to_days(startTime) &lt; to_days(now()) ORDER BY hot LIMIT 0,4;
-      </if>
-        <if test="1=#{detailsId}">
-            WHERE YEARWEEK(date_format(startTime,'%Y-%m-%d')) = YEARWEEK(now()) ORDER BY hot LIMIT 0,4;
-        </if>
-        <if test="#{detailsId}=2">
-            WHERE DATE_FORMAT( startTime, '%Y%m' ) = DATE_FORMAT( CURDATE() , '%Y%m' ) ORDER BY hot LIMIT 0,4;
-        </if>
+    <select id="selectTop5Match" resultType="match" >
+      select title,detail from t_match where to_days(startTime) &lt; to_days(now()) ORDER BY hot LIMIT 0,4;
+
   </select>
+    <select id="selectTop5Match1" resultType="match" >
+        select * from t_match WHERE YEARWEEK(date_format(startTime,'%Y-%m-%d')) = YEARWEEK(now()) ORDER BY hot LIMIT 0,4;
+
+    </select>
+    <select id="selectTop5Match2" resultType="match">
+        select * from t_match WHERE DATE_FORMAT( startTime, '%Y%m' ) = DATE_FORMAT( CURDATE() , '%Y%m' ) ORDER BY hot LIMIT 0,4;
+
+    </select>
 </mapper>

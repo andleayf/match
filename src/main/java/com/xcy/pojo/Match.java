@@ -10,6 +10,17 @@ public class Match {
     private String url;
     private String detailsId;
 
+    @Override
+    public String toString() {
+        return "Match{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", detail='" + detail + '\'' +
+                ", url='" + url + '\'' +
+                ", detailsId='" + detailsId + '\'' +
+                '}';
+    }
+
     public String getUrl() {
         return url;
     }
@@ -58,12 +69,5 @@ public class Match {
     public Match() {
     }
 
-    @Override
-    public String toString() {
-        return "Match{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", detail='" + detail + '\'' +
-                '}';
-    }
+
 }

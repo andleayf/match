@@ -1,5 +1,7 @@
 package com.xcy.controller;
+import	java.util.ArrayList;
 
+import com.xcy.pojo.News;
 import com.xcy.pojo.Player;
 import com.xcy.service.NewService;
 import com.xcy.service.PlayerService;
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -30,8 +33,9 @@ public class NewController {
 
     @RequestMapping(value ="/headnew",method = RequestMethod.GET)
     @ApiOperation(value ="头条新闻")
-    public String selectHeadNew() throws Exception{
-        List<Player> list=newService.selectHeadNew();
+    @ResponseBody
+    public List<Player> selectHeadNew() throws Exception{
+
 
         Date now=new Date();
         SimpleDateFormat f   =   new   SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -39,23 +43,34 @@ public class NewController {
         Date end = null;
 
             end = f.parse(time);
-            java.util.Date   begin=   f.parse("2019-08-01 23:35:45");
+            java.util.Date   begin=   f.parse("2018-09-09 10:10");
             String xx = getBeapartDate(getSecond(end,begin));
             System.out.println(xx);
+        News news = new News();
+        news.setXx(xx);
 
-            Map<String,List <Player>> map=new HashMap<String,List <Player>>();
-            List<Player> list1 = map.put(xx, list);
-        System.out.println(list1);
-            return JsonUtils.objectToJson(list1);
+        List<Player> list=newService.selectHeadNew(news);
+
+
+
+
+
+
+            //Map<String,List <Player>> map=new HashMap<String,List <Player>>();
+            //List<Player> list1 = map.put(xx, list);
+            //System.out.println(map);
+
+            return list;
     }
 
 
     @RequestMapping(value ="/moreNew",method = RequestMethod.GET)
     @ApiOperation(value ="更多新闻")
+    @ResponseBody
 
-    public String selectMoreNew(){
+    public List<Player> selectMoreNew(){
         List<Player> list=newService.selectMoreNew();
-        return JsonUtils.objectToJson(list);
+        return list;
     }
 
 
