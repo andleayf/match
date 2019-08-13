@@ -8,7 +8,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @EnableSwagger2
 @SpringBootApplication
-@MapperScan(basePackages ="com.xcy.repository")
+@MapperScan(basePackages ={"com.xcy.mapper","com.xcy.repository"})
 //@EnableElasticsearchRepositories(basePackages ="com.xcy.repository")
 public class MatchApplication {
 
