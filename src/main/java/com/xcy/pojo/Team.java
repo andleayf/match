@@ -1,5 +1,7 @@
 package com.xcy.pojo;
 
+import java.util.List;
+
 public class Team {
     private int id;
     private String name;
@@ -9,6 +11,7 @@ public class Team {
     private int hot;
     private int type;
     private String country;
+    private List<Player> players;
 
     @Override
     public String toString() {
@@ -58,6 +61,14 @@ public class Team {
 
     public void setDetail(String detail) {
         this.detail = detail;
+    }
+
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(List<Player> players) {
+        this.players = players;
     }
 
     public int getWin() {
