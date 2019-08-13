@@ -1571,7 +1571,7 @@ td.country {
     padding: .5em 0;
     color: #333;
     font-size: .875em;
-    width: 47px;
+    width: 80px;
     text-align: center;
 }
 td.country a{
@@ -3766,9 +3766,11 @@ blockquote > p {
 	}
 	td.country {
 		font-size: .875em;
+        width: 177px;
 	}
 	td.t-points {
 		font-size: .875em;
+        width: 156px;
 	}
 	th.th-country {
         font-size: .875em;
